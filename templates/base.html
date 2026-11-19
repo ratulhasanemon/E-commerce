@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Craft Shop - Premium Curtains & Home Decor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showPage('home'); return false;">
+                <div class="navbar-logo">
+                    <img src="https://scontent.fdac177-2.fna.fbcdn.net/v/t39.30808-1/561755053_1166389092266627_1935052729714993335_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=BQdWH94hwzQQ7kNvwEofF8p&_nc_oc=AdmXoDJWkTPoB3cIXT-JTWw4LNrhNIQxpYpvo-DBmpq-M2Ik9TXwiScRvj0j7bj1bKg&_nc_zt=24&_nc_ht=scontent.fdac177-2.fna&_nc_gid=gf5CxeDsocS1U2OU9uDESw&oh=00_AfrGOUozz4EfqBo2ppmVeE-r0ojfk_iQEAG-oQ-xw-0fsA&oe=697ECDE7" alt="E-Craft Shop">
+                </div>
+                <span data-translate="siteName">E-Craft Shop</span>
+            </a>
+            
+            <!-- Mobile Controls Container -->
+            <div class="mobile-controls">
+                <!-- Mobile Language Toggle (before hamburger menu) -->
+                <button class="language-toggle-btn mobile-lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
+                    <i class="fas fa-globe"></i>
+                    <span id="langTextMobile">EN</span>
+                </button>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showPage('home'); return false;" data-translate="navHome">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showPage('shop'); return false;" data-translate="navShop">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cart-link" href="#" onclick="showPage('cart'); return false;">
+                        <i class="fas fa-shopping-cart"></i> <span data-translate="navCart">Cart</span>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button class="language-toggle-btn" onclick="toggleLanguage()" aria-label="Toggle language">
+                        <i class="fas fa-globe"></i>
+                        <span id="langText">EN</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="text-carousel">
+            <div class="carousel-track" id="textCarousel"></div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-bars"></i> <span data-translate="sidebarMenu">Menu</span></h3>
+            <button class="sidebar-close" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-body">
+            <ul class="sidebar-menu">
+                <!-- Menu items will be dynamically generated -->
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <div class="sidebar-contact">
+                <div class="sidebar-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+8801316161556">+880 1316-161556</a>
+                </div>
+                <div class="sidebar-contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://instagram.com/ecraftshopbd" target="_blank">@ecraftshopbd</a>
+                </div>
+                <div class="sidebar-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span data-translate="locationDhaka">Dhaka, Bangladesh</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Cart Icon -->
+    <div class="floating-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="floatingCartBadge">0</span>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-translate="footerAboutTitle">E-Craft Shop সম্পর্কে</h3>
+                    <p data-translate="footerAboutText">আপনার ঘরের জন্য প্রিমিয়াম মানের পর্দা ও হোম ডেকোরের নির্ভরযোগ্য উৎস। সততা এবং মানসম্মত পণ্য দিয়ে আমরা আপনার ঘরে নিয়ে আসি কমফোর্ট ও সৌন্দর্য।</p>
+                    <div class="social-icons">
+                        <div class="social-icon" onclick="window.open('https://www.facebook.com/ecraftshopbd', '_blank')">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="social-icon" onclick="window.open('https://instagram.com/ecraftshopbd', '_blank')">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footerQuickLinks">দ্রুত লিংক</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home'); return false;" data-translate="navHome">হোম</a></li>
+                        <li><a href="#" onclick="showPage('shop'); return false;" data-translate="navShop">শপ</a></li>
+                        <li><a href="#" data-translate="footerAbout">আমাদের সম্পর্কে</a></li>
+                        <li><a href="#" data-translate="footerContact">যোগাযোগ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footerCustomerService">কাস্টমার সার্ভিস</h3>
+                    <ul>
+                        <li><a href="#" data-translate="footerShipping">শিপিং পলিসি</a></li>
+                        <li><a href="#" data-translate="footerReturn">রিটার্ন পলিসি</a></li>
+                        <li><a href="#" data-translate="footerTerms">শর্তাবলী</a></li>
+                        <li><a href="#" data-translate="footerPrivacy">প্রাইভেসি পলিসি</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footerContactUs">যোগাযোগ করুন</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+8801316161556">+880 1316-161556</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:hasib.shishir55@gmail.com">hasib.shishir55@gmail.com</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-translate="locationDhaka">ঢাকা, বাংলাদেশ</span></li>
+                        <li><i class="fab fa-instagram"></i> <a href="https://instagram.com/ecraftshopbd" target="_blank">@ecraftshopbd</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 E-Craft Shop. <span data-translate="footerRights">All rights reserved.</span> | <span data-translate="footerDesigned">Designed with</span> <i class="fas fa-heart" style="color: var(--accent-coral);"></i> <a href="https://nextweb.bd/" class="link-underline-dark">NEXTweb Bangladesh</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

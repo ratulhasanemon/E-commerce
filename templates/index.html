@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Mobile Cart Icon -->
+   
+    <!-- Home Page -->
+    <div id="homePage" class="page active">
+        <!-- Text Carousel -->
+        {% comment %} <div class="text-carousel">
+            <div class="carousel-track" id="textCarousel"></div>
+        </div> {% endcomment %}
+
+        <!-- Enhanced Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-particles" id="heroParticles"></div>
+            <div class="hero-content">
+                <!-- Left Side - Text Content -->
+                <div class="hero-text">
+                    <div class="hero-badge" data-translate="heroBadge">✦ PREMIUM QUALITY SINCE 2020 ✦</div>
+                    <h1><span data-translate="heroTitle">Transform Your</span> <span data-translate="heroTitleSpan">Space</span></h1>
+                    <p data-translate="heroSubtitle">Discover premium curtains and home decor that reflect your style</p>
+                    <p class="hero-tagline" data-translate="heroTagline">আপনাকে ভালো প্রোডাক্ট দেয়া আমাদের দায়িত্ব, ইনশাল্লাহ আমরা দিচ্ছি । আপনি ভালো প্রোডাক্ট নিবেন কি নিবেন না, এই দায়িত্ব আপনার।</p>
+                    
+                    <!-- Two Buttons -->
+                    <div class="hero-buttons">
+                        <button class="hero-btn hero-btn-secondary" onclick="scrollToCategories()">
+                            <span><i class="fas fa-th-large"></i> <span data-translate="heroBtnCategories">Categories</span></span>
+                        </button>
+                        <button class="hero-btn hero-btn-primary" onclick="showPage('shop')">
+                            <span><span data-translate="heroBtnShop">Shop Now</span> <i class="fas fa-arrow-right"></i></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Hero Image -->
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000" alt="Premium Curtains and Home Decor">
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Section -->
+        <section class="category-section" id="categoriesSection">
+            <div class="container">
+                <h2 class="section-title" data-translate="categoryTitle">Browse by Category</h2>
+                <div class="category-pills" id="categoryPills"></div>
+                <div id="categoryProducts"></div>
+            </div>
+        </section>
+
+        <!-- Business Info Section -->
+        <section class="business-info-section">
+            <div class="container business-info-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="info-card">
+                            <h3><i class="fas fa-store"></i> <span data-translate="businessInfoTitle">E-Craft Shop</span></h3>
+                            <p data-translate="businessInfoText">Providing quality products is our responsibility, InshaAllah we deliver with honesty. Whether you choose to purchase good products or not is the customer's decision.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong data-translate="addressLabel">Address</strong><br>
+                            88, Dhalkanagar, Gandaria<br>
+                            Dhaka, Bangladesh – 1204
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong data-translate="phoneLabel">Phone</strong><br>
+                            <a href="tel:+8801316161556">+880 1316-161556</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong data-translate="emailLabel">Email</strong><br>
+                            <a href="mailto:hasib.shishir55@gmail.com">hasib.shishir55@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <strong data-translate="instagramLabel">Instagram</strong><br>
+                            <a href="https://instagram.com/ecraftshopbd" target="_blank">@ecraftshopbd</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Shop Page -->
+    <div id="shopPage" class="page">
+        <section class="category-section">
+            <div class="container">
+                <h2 class="section-title" data-translate="allProducts">All Products</h2>
+                <div class="category-pills" id="shopCategoryPills"></div>
+                <div class="product-grid" id="shopProductGrid"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Product Details Page -->
+    <div id="productPage" class="page">
+        <section class="category-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="productImageDetail" class="product-image" style="height: 500px; border-radius: 15px;"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h2 id="productNameDetail"></h2>
+                        <h3 class="product-price" id="productPriceDetail"></h3>
+                        <p id="productDescDetail"></p>
+                        <div class="mt-4">
+                            <h5 data-translate="specifications">Specifications:</h5>
+                            <ul id="productSpecsDetail"></ul>
+                        </div>
+                        <button class="add-to-cart-btn mt-4" onclick="addToCartFromDetail()">
+                            <span><i class="fas fa-cart-plus"></i> <span data-translate="addToCart">Add to Cart</span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="product-images">
+        <img id="mainProductImage" src="" alt="">
+        <div id="thumbnailImages" class="thumbnails"></div>
+    </div>
+
+
+    <!-- Cart Page -->
+    <div id="cartPage" class="page">
+        <section class="cart-section">
+            <div class="container">
+                <h2 class="section-title" data-translate="shoppingCart">Shopping Cart</h2>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div id="cartItems"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cart-summary">
+                            <h4 data-translate="orderSummary">Order Summary</h4>
+                            <div class="summary-row">
+                                <span data-translate="subtotal">Subtotal:</span>
+                                <span id="subtotal">৳0</span>
+                            </div>
+                            <div class="summary-row summary-total">
+                                <span data-translate="total">Total:</span>
+                                <span id="total">৳0</span>
+                            </div>
+                            <button class="checkout-btn" onclick="showPage('checkout')">
+                                <span data-translate="proceedCheckout">Proceed to Checkout</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Checkout Page -->
+    <div id="checkoutPage" class="page">
+        <section class="checkout-section">
+            <div class="container">
+                <h2 class="section-title" data-translate="checkout">Checkout</h2>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="checkout-form">
+                            <h4 data-translate="shippingInfo">Shipping Information</h4>
+                            <div class="form-group">
+                                <label data-translate="fullName">Full Name</label>
+                                <input type="text" id="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-translate="phoneNumber">Phone Number</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-translate="email">Email</label>
+                                <input type="email" id="email">
+                            </div>
+                            
+                            <h5 class="mt-4" data-translate="deliveryLocation">Delivery Location</h5>
+                            <div class="location-selector">
+                                <div class="location-option" onclick="selectLocation('dhaka')">
+                                    <i class="fas fa-city" style="font-size: 2rem; color: var(--secondary-color);"></i>
+                                    <h5 data-translate="insideDhaka">Inside Dhaka</h5>
+                                    <p><span data-translate="delivery">Delivery:</span> ৳60</p>
+                                </div>
+                                <div class="location-option" onclick="selectLocation('outside')">
+                                    <i class="fas fa-map-marked-alt" style="font-size: 2rem; color: var(--secondary-color);"></i>
+                                    <h5 data-translate="outsideDhaka">Outside Dhaka</h5>
+                                    <p><span data-translate="delivery">Delivery:</span> ৳120</p>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label data-translate="fullAddress">Full Address</label>
+                                <textarea id="address" rows="3" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label data-translate="orderNotes">Order Notes (Optional)</label>
+                                <textarea id="notes" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="cart-summary">
+                            <h4 data-translate="orderSummary">Order Summary</h4>
+                            <div id="checkoutItems"></div>
+                            <div class="summary-row mt-3">
+                                <span data-translate="subtotal">Subtotal:</span>
+                                <span id="checkoutSubtotal">৳0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span data-translate="deliveryCharge">Delivery Charge:</span>
+                                <span id="deliveryCharge">৳0</span>
+                            </div>
+                            <div class="summary-row summary-total">
+                                <span data-translate="total">Total:</span>
+                                <span id="checkoutTotal">৳0</span>
+                            </div>
+                            <button class="checkout-btn" onclick="placeOrder()">
+                                <i class="fas fa-check-circle"></i> <span data-translate="placeOrder">Place Order</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+        <!-- Order Confirmation Modal -->
+    <div class="modal fade" id="orderConfirmationModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle text-success"></i> <span data-translate="orderSuccess">অর্ডার সফল হয়েছে</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="success-animation mb-3">
+                        <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--secondary-color);"></i>
+                    </div>
+                    <h4 data-translate="thankYou">আপনার অর্ডারের জন্য ধন্যবাদ!</h4>
+                    <p data-translate="orderCompleted">আপনার অর্ডার সফলভাবে সম্পন্ন হয়েছে।</p>
+                    <div class="order-details mt-3">
+                        <p><strong data-translate="orderId">অর্ডার আইডি:</strong> <span id="modalOrderId"></span></p>
+                        <p><strong data-translate="totalAmount">মোট টাকা:</strong> <span id="modalOrderTotal"></span></p>
+
+
+                    </div>
+                    <p class="mt-3"><span data-translate="contactSoon">আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব</span> <strong id="modalCustomerPhone"></strong></p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="window.location.reload()"><span data-translate="okay">ঠিক আছে</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
